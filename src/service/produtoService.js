@@ -1,6 +1,6 @@
 const produtoRepository = require('../db/produtoRepository');
 const { conflict } = require('../errors/AppError');
-const { requireInteiroPositivo, requireNumeroPositivo } = require('../validation/validators');
+const { requireInteiroPositivo, requireNumeroPositivo, requireProduto } = require('../validation/validators');
 
 function cadastrarProduto({ codigo, preco } = {}) {
   requireInteiroPositivo(codigo, 'codigo');
@@ -14,4 +14,10 @@ function cadastrarProduto({ codigo, preco } = {}) {
   return { codigo: produto.codigo, preco: produto.preco, estoque: produto.estoque };
 }
 
-module.exports = { cadastrarProduto };
+function consultarEstoque(codigo) {
+  requireInteiroPositivo(codigo, 'codigo');
+  const produto = requireProduto(produtoRepository.buscarPorCodigo(codigo), codigo);
+  return { codigo: produto.codigo, estoque: produto.estoque };
+}
+
+module.exports = { cadastrarProduto, consultarEstoque };

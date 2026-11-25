@@ -25,6 +25,10 @@ form input {
   width: 100px;
 }
 
+.item-venda {
+  margin-bottom: 6px;
+}
+
 pre {
   background: #eee;
   padding: 12px;

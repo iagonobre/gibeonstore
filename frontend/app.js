@@ -47,3 +47,27 @@ document.getElementById('form-saida').addEventListener('submit', (event) => {
   const codigo = encodeURIComponent(form.codigo.value.trim());
   chamarApi('PUT', `/loja/produto/${codigo}/saida`, { quantidade: lerNumero(form.quantidade.value) });
 });
+
+// Venda: cada linha tem codigo, quantidade e um botão "Remover".
+function adicionarItemVenda() {
+  const linha = document.createElement('div');
+  linha.className = 'item-venda';
+  linha.innerHTML = `
+    <label>Código <input name="codigo"></label>
+    <label>Quantidade <input name="quantidade"></label>
+    <button type="button">Remover</button>`;
+  linha.querySelector('button').addEventListener('click', () => linha.remove());
+  document.getElementById('itens-venda').appendChild(linha);
+}
+
+document.getElementById('adicionar-item').addEventListener('click', adicionarItemVenda);
+adicionarItemVenda();
+
+document.getElementById('form-venda').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const itens = [...document.querySelectorAll('.item-venda')].map((linha) => ({
+    codigo: lerNumero(linha.querySelector('[name="codigo"]').value),
+    quantidade: lerNumero(linha.querySelector('[name="quantidade"]').value),
+  }));
+  chamarApi('POST', '/loja/venda', { itens });
+});

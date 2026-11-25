@@ -1,4 +1,5 @@
 const produtoRepository = require('../db/produtoRepository');
+const { conflict } = require('../errors/AppError');
 const { requireInteiroPositivo, requireProduto } = require('../validation/validators');
 
 function entradaEstoque(codigo, { quantidade } = {}) {
@@ -10,4 +11,17 @@ function entradaEstoque(codigo, { quantidade } = {}) {
   return { codigo: atualizado.codigo, estoque: atualizado.estoque };
 }
 
-module.exports = { entradaEstoque };
+function saidaEstoque(codigo, { quantidade } = {}) {
+  requireInteiroPositivo(codigo, 'codigo');
+  requireInteiroPositivo(quantidade, 'quantidade');
+  const produto = requireProduto(produtoRepository.buscarPorCodigo(codigo), codigo);
+
+  if (quantidade > produto.estoque) {
+    throw conflict(`Estoque insuficiente para o produto ${codigo}`);
+  }
+
+  const atualizado = produtoRepository.atualizarEstoque(codigo, produto.estoque - quantidade);
+  return { codigo: atualizado.codigo, estoque: atualizado.estoque };
+}
+
+module.exports = { entradaEstoque, saidaEstoque };

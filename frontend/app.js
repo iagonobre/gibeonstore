@@ -33,3 +33,17 @@ document.getElementById('form-consultar').addEventListener('submit', (event) => 
   const codigo = encodeURIComponent(event.target.codigo.value.trim());
   chamarApi('GET', `/loja/produto/${codigo}/estoque`);
 });
+
+document.getElementById('form-entrada').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const codigo = encodeURIComponent(form.codigo.value.trim());
+  chamarApi('PUT', `/loja/produto/${codigo}/entrada`, { quantidade: lerNumero(form.quantidade.value) });
+});
+
+document.getElementById('form-saida').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const codigo = encodeURIComponent(form.codigo.value.trim());
+  chamarApi('PUT', `/loja/produto/${codigo}/saida`, { quantidade: lerNumero(form.quantidade.value) });
+});

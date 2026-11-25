@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GibeonStore</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>GibeonStore</h1>
+
+  <main>
+    <section>
+      <h2>Cadastrar Produto</h2>
+      <form id="form-cadastrar">
+        <label>Código <input name="codigo"></label>
+        <label>Preço <input name="preco"></label>
+        <button type="submit">Cadastrar</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Consultar Estoque</h2>
+      <form id="form-consultar">
+        <label>Código <input name="codigo"></label>
+        <button type="submit">Consultar</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Entrada de Estoque</h2>
+      <form id="form-entrada">
+        <label>Código <input name="codigo"></label>
+        <label>Quantidade <input name="quantidade"></label>
+        <button type="submit">Registrar entrada</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Saída de Estoque</h2>
+      <form id="form-saida">
+        <label>Código <input name="codigo"></label>
+        <label>Quantidade <input name="quantidade"></label>
+        <button type="submit">Registrar saída</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Venda</h2>
+      <form id="form-venda">
+        <div id="itens-venda"></div>
+        <button type="button" id="adicionar-item">Adicionar item</button>
+        <button type="submit">Realizar venda</button>
+      </form>
+    </section>
+  </main>
+
+  <h2>Resultado</h2>
+  <pre id="resultado">Nenhuma requisição feita ainda.</pre>
+
+  <script src="app.js"></script>
+</body>
+</html>

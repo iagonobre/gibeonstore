@@ -18,3 +18,18 @@ async function chamarApi(metodo, caminho, corpo) {
 function mostrarResultado(titulo, dados) {
   document.getElementById('resultado').textContent = `${titulo}\n${JSON.stringify(dados, null, 2)}`;
 }
+
+document.getElementById('form-cadastrar').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = event.target;
+  chamarApi('POST', '/loja/produto', {
+    codigo: lerNumero(form.codigo.value),
+    preco: lerNumero(form.preco.value),
+  });
+});
+
+document.getElementById('form-consultar').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const codigo = encodeURIComponent(event.target.codigo.value.trim());
+  chamarApi('GET', `/loja/produto/${codigo}/estoque`);
+});

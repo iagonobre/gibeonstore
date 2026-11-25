@@ -8,4 +8,9 @@ router.post('/produto', (req, res) => {
   res.status(201).json(produto);
 });
 
+router.get('/produto/:codigo/estoque', (req, res) => {
+  const resultado = produtoService.consultarEstoque(Number(req.params.codigo));
+  res.status(200).json(resultado);
+});
+
 module.exports = router;

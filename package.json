@@ -1,0 +1,18 @@
+{
+  "name": "gibeonstore",
+  "version": "0.1.0",
+  "description": "Controle de produtos e estoque de uma loja virtual",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.2.0",
+    "express": "^5.3.0"
+  }
+}
